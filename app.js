@@ -8,11 +8,11 @@ const cowsay = require('cowsay');
 
 //const hello = require('./hello')
 
-
+//////////////////////////////////////////////////
 //block 4 : 開始執行
 console.log(cowsay.say({
     text: "I'm John Cecow",
-    e: "oO",
+    e: "TT",
     T: "U "
 }));
 //console.log(path.join(__dirname, 'index.js'));
