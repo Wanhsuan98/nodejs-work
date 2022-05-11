@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Wanhsuan98/nodejs-work/issues"
   },
-  "homepage": "https://github.com/Wanhsuan98/nodejs-work#readme"
+  "homepage": "https://github.com/Wanhsuan98/nodejs-work#readme",
+  "dependencies": {
+    "cowsay": "^1.5.0"
+  }
 }
