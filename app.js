@@ -18,10 +18,12 @@ const server = http.createServer((req, res) => {
     //console.log('req url:', req.url);
     if (req.url === '/') {
         //console.log('login page')
-        return res.end('this is home page');
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        return res.end('<h2>this is home page<h2>');
     }
     if (req.url === '/login') {
         //console.log('login page')
+        //res.statusCode = 200;
         return res.end('this is login page');
     }
 
