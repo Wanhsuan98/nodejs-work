@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
     // res.write('</body>')
     res.status(200).render('index', {
         path: '/',
-        pageTitle: '貓咪大戰爭 開打!!!',
+        pageTitle: 'book your books :)',
         products
     });
 });
@@ -63,6 +63,7 @@ app.post('/login', (req, res) => {
 
 app.get('*', (req, res) => {
     res.status(404).render('404', {
+        path: '*',
         pageTitle: '404  page is not found!!!'
     });
 }); //4*代表萬用路由 -> 要放在最後面 才不會讓首頁或login葉面也被偵測為404
