@@ -46,7 +46,7 @@ app.get('/', (req, res) => {
 app.get('/login', (req, res) => { //處理路由
     res.status(200) //回傳狀態碼
         .render('login', {
-            loginTitle: 'sign in'
+            pageTitle: 'sign in'
         }); //回傳檔案位置
 });
 
@@ -61,7 +61,7 @@ app.post('/login', (req, res) => {
 
 app.get('*', (req, res) => {
     res.status(404).render('404', {
-        wrongTitle: '404  page is not found!!!'
+        pageTitle: '404  page is not found!!!'
     });
 }); //4*代表萬用路由 -> 要放在最後面 才不會讓首頁或login葉面也被偵測為404
 
