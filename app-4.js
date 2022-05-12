@@ -36,13 +36,17 @@ app.get('/', (req, res) => {
     // res.write('<body>')
     // res.write('<h1>這是首頁</h1>')
     // res.write('</body>')
-    res.status(200).render('index');
+    res.status(200).render('index', {
+        pageTitle: '貓咪大戰爭 開打!!!'
+    });
 });
 
 
 app.get('/login', (req, res) => { //處理路由
     res.status(200) //回傳狀態碼
-        .render('login'); //回傳檔案位置
+        .render('login', {
+            loginTitle: 'sign in'
+        }); //回傳檔案位置
 });
 
 app.post('/login', (req, res) => {
@@ -55,7 +59,9 @@ app.post('/login', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-    res.status(404).render('404');
+    res.status(404).render('404', {
+        wrongTitle: '404  page is not found!!!'
+    });
 }); //4*代表萬用路由 -> 要放在最後面 才不會讓首頁或login葉面也被偵測為404
 
 
