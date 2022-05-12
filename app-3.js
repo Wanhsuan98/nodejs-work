@@ -2,7 +2,8 @@
 const path = require('path')
 
 //block 2 : 第三方模組
-const express = require('express')
+const express = require('express');
+const bodyParser = require('body-parser');
 
 //block 3 : 自建模組
 
@@ -12,17 +13,19 @@ const express = require('express')
 
 const app = express();
 
-
-app.use((req, res, next) => {
-    console.log('Hello!');
-    next()
-});
-
-app.use((req, res, next) => {
-    console.log('World!');
-    next()
-});
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({ extended: false }));
+
+
+// app.use((req, res, next) => {
+//     console.log('Hello!');
+//     next()
+// });
+
+// app.use((req, res, next) => {
+//     console.log('World!');
+//     next()
+// });
 
 app.get('/', (req, res) => {
     // res.writeHead(200, { 'Content-Type': 'text/html' }); //原生作法
@@ -37,6 +40,15 @@ app.get('/', (req, res) => {
 app.get('/login', (req, res) => { //處理路由
     res.status(200) //回傳狀態碼
         .sendFile(path.join(__dirname, 'views', 'login.html')); //回傳檔案位置
+});
+
+app.post('/login', (req, res) => {
+    const { email, password } = req.body; //解構附值寫法
+    if (email && password) {
+        res.redirect('/');
+    } else {
+        console.log('欄位尚未填寫完成！')
+    }
 });
 
 
