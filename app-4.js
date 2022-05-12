@@ -37,6 +37,7 @@ app.get('/', (req, res) => {
     // res.write('<h1>這是首頁</h1>')
     // res.write('</body>')
     res.status(200).render('index', {
+        path: '/',
         pageTitle: '貓咪大戰爭 開打!!!',
         products
     });
@@ -46,6 +47,7 @@ app.get('/', (req, res) => {
 app.get('/login', (req, res) => { //處理路由
     res.status(200) //回傳狀態碼
         .render('login', {
+            path: '/login',
             pageTitle: 'sign in'
         }); //回傳檔案位置
 });
