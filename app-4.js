@@ -61,6 +61,11 @@ app.post('/login', (req, res) => {
     }
 });
 
+app.post('/logout', (req, res) => {
+    res.redirect('/login')
+})
+
+
 app.get('*', (req, res) => {
     res.status(404).render('404', {
         path: '*',
