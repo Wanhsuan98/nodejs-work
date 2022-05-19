@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 
 //block 3 : 自建模組
 
+app.use(authRputes);
 
 //////////////////////////////////////////////////
 //block 4 : middle ware
@@ -44,26 +45,26 @@ app.get('/', (req, res) => {
 });
 
 
-app.get('/login', (req, res) => { //處理路由
-    res.status(200) //回傳狀態碼
-        .render('login', {
-            path: '/login',
-            pageTitle: 'sign in'
-        }); //回傳檔案位置
-});
+// app.get('/login', (req, res) => { //處理路由
+// res.status(200) //回傳狀態碼
+// .render('login', {
+//     path: '/login',
+//     pageTitle: 'sign in'
+// }); //回傳檔案位置
+// });
 
-app.post('/login', (req, res) => {
-    const { email, password } = req.body; //解構附值寫法
-    if (email && password) {
-        res.redirect('/');
-    } else {
-        console.log('欄位尚未填寫完成！')
-    }
-});
+// app.post('/login', (req, res) => {
+//     const { email, password } = req.body; //解構附值寫法
+//     if (email && password) {
+//         res.redirect('/');
+//     } else {
+//         console.log('欄位尚未填寫完成！')
+//     }
+// });
 
-app.post('/logout', (req, res) => {
-    res.redirect('/login')
-})
+// app.post('/logout', (req, res) => {
+//     res.redirect('/login')
+// })
 
 
 app.get('*', (req, res) => {
