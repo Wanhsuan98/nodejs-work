@@ -1,41 +1,63 @@
-//block 1 : 內建模組
-const path = require('path')
-const http = require('http')
+// 第一個區塊 內建模組
+const path = require('path');
 
+// 第二個區塊 第三方模組(套件)
+const express = require('express');
+const bodyParser = require('body-parser');
 
-//block 2 : 第三方模組
+// 第三個區塊 自建模組
+const authRoutes = require('./routes/auth');
+const shopRoutes = require('./routes/shop');
+const errorRoutes = require('./routes/404');
 
-//block 3 : 自建模組
+////////////////////////////////////////////////////////////////
 
-//const hello = require('./hello')
+const app = express();
 
-//////////////////////////////////////////////////
-//block 4 : 開始執行
+// middleware
+app.set('view engine', 'ejs');
+app.set('views', 'views');
 
-const server = http.createServer((req, res) => {
-    //console.log('第一個參數是瀏覽器對 web server 的 request', req);
-    //console.log('第二個參數是 web 要response 給瀏覽器的內容', res);
-    //console.log('req url:', req.url);
-    if (req.url === '/') {
-        //console.log('login page')
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        return res.end('<h2>this is home page<h2>');
-    }
-    if (req.url === '/login') {
-        //console.log('login page')
-        //res.statusCode = 200;
-        return res.end('this is login page');
-    }
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({ extended: false }));
 
-    res.end('page not found');
+app.use((req, res, next) => {
+    console.log('Hello!');
+    next();
 });
 
-server.listen(3000, () => {
-    console.log('running server on port 3000');
+app.use((req, res, next) => {
+    console.log('World!');
+    next();
 });
-//console.log(path.join(__dirname, 'index.js'));
 
 
-// hello.sayHello();
-// console.log(hello.title)
-//console.log('module', module);
+app.use(authRoutes);
+app.use(shopRoutes);
+app.use(errorRoutes);
+
+
+app.listen(3000, () => {
+    console.log('Web Server is running on port 3000');
+});
+
+const products = [
+    {
+        title: '四月是你的謊言 1',
+        price: 80,
+        description: '有馬公生的母親一心想把有馬培育成舉世聞名的鋼琴家，而有馬也不負母親的期望，在唸小學時就贏得許多鋼琴比賽的大獎。11歲的秋天，有馬的母親過世，從此他再也聽不見自己彈奏的鋼琴聲，沮喪的他也只好放棄演奏，但在14歲那年，經由兒時玩伴的介紹，有馬認識了小提琴手宮園薰，並被薰的自由奔放吸引，沒想到薰竟開口邀請公生在比賽時擔任她的伴奏…',
+        imageUrl: 'https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/062/25/0010622563.jpg&v=52dcfd21&w=348&h=348'
+    },
+    {
+        title: '四月是你的謊言 2',
+        price: 80,
+        description: '公生答應在二次預賽中擔任小薰的鋼琴伴奏。比賽一開始公生還能順利彈琴，但在中途又再次因為聽不見鋼琴的聲音而停手。沒想到小薰也跟著停止演奏、等候公生。原本心灰意冷的公生因此重新振作，與小薰合奏出驚人的樂章…......',
+        imageUrl: 'https://im1.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/062/31/0010623172.jpg&v=52dcfd21&w=348&h=348'
+    },
+    {
+        title: '四月是你的謊言 3',
+        price: 80,
+        description: '在小薰的逼迫之下，公生不得不參加音樂比賽。為了參加比賽，公生從早到晚不停的練習，但就是無法彈奏出屬於自己的巴哈與蕭邦。此時，公生的面前出現兩位強勁的對手-相座武士與井川繪見，他們曾經是公生的手下敗將，一心想在比賽中擊敗公生雪恥。先上台演奏的武士彈奏出令全場喝采的激昂樂章…',
+        imageUrl: 'https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/062/76/0010627615.jpg&v=5315ab5f&w=348&h=348'
+    },
+];
