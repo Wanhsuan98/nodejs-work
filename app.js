@@ -67,9 +67,9 @@ app.use(errorRoutes);
 
 database
     // .sync()
-    .sync({ force: true })
+    .sync({ force: true }) //和db 連線時，強制重設 db
     .then((result) => {
-        User.create({ displayName: 'Admin', email: 'admin@skoob.com', password: '11111111' })
+        User.create //({ displayName: '', email: '', password: '' })
         Products.bulkCreate(products);
         app.listen(port, () => {
             console.log(`Web Server is running on port {$port}`);
